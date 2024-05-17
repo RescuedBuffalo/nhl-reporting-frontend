@@ -1,6 +1,12 @@
 from flask import Flask, send_from_directory
 import os
 
+def create_app(config_filename):
+    app = Flask(__name__)
+    app.config.from_pyfile(config_filename)
+
+    import frontend
+    app.regist
 app = Flask(__name__, static_folder='../../frontend/build', static_url_path='/')
 
 @app.route('/', defaults={'path': ''})
@@ -13,4 +19,4 @@ def serve(path):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
