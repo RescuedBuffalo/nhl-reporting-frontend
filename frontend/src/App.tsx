@@ -12,7 +12,7 @@ const App = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const baseUrl = "https://nhl-data-collector-2652a6097459.herokuapp.com/";
+      const baseUrl = "https://nhl-data-collector-2652a6097459.herokuapp.com";
       const response = await fetch(`${baseUrl}/fetch-nhl-goal-leaders`);
       const jsonData = await response.json();
       setData(jsonData);
