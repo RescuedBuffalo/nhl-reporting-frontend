@@ -1,46 +1,53 @@
-import React, { useState } from 'react';
-import './App.css';
-import DataTable from './DataTable';
-import { PlayerDetails } from './types';
+import React from 'react';
+import styled from 'styled-components';
+import Header from './components/Header';
+import Highlight from './components/Highlight';
+import Tabs from './components/Tabs';
+import NewsTicker from './components/NewsTicker';
+import Footer from './components/Footer';
 
+const AppContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+`;
 
-const App = () => {
-  const [data, setData] = useState<{[key: string]: PlayerDetails}>({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+const Main = styled.main`
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+`;
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const baseUrl = "https://nhl-data-collector-2652a6097459.herokuapp.com";
-      const response = await fetch(`${baseUrl}/fetch-nhl-goal-leaders`);
-      const jsonData = await response.json();
-      setData(jsonData);
-      setError('');
-    } catch (err) {
-      setError('Failed to fetch data.');
-      setData({});
-    } finally {
-      setLoading(false);
-    }
-  };
+const HighlightContainer = styled.div`
+    height: 40vh;
+`;
 
-  return (
-    <div className="App">
-      <button onClick={fetchData} 
-          disabled={loading}
-          style={{ 
-            marginTop: '20px', 
-            position: 'absolute', 
-            left: '50%', 
-            transform: 'translateX(-50%)' 
-            }}
-      >
-        {loading ? 'Loading...' : 'Fetch Data'}
-      </button>
-      <DataTable data={data}/>
-    </div>
-  );
+const TabsContainer = styled.div`
+    height: 35vh;
+`;
+
+const NewsTickerContainer = styled.div`
+    height: 25vh;
+`;
+
+const App: React.FC = () => {
+    return (
+        <AppContainer>
+            <Header />
+            <Main>
+                <HighlightContainer>
+                    <Highlight />
+                </HighlightContainer>
+                <TabsContainer>
+                    <Tabs />
+                </TabsContainer>
+                <NewsTickerContainer>
+                    <NewsTicker />
+                </NewsTickerContainer>
+            </Main>
+            <Footer />
+        </AppContainer>
+    );
 }
 
 export default App;

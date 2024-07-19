@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlayerDetails, DataTableProps } from './types';
+import { PlayerDetails, DataTableProps } from '../types';
 
 
 

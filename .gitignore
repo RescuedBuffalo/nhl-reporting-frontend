@@ -159,7 +159,6 @@ cython_debug/
 #.idea/
 
 # react dependencies
-/node_modules
 /.pnp
 .pnp.js
 
@@ -168,6 +167,7 @@ cython_debug/
 
 # production
 frontend/node_modules
+frontend/build
 
 # misc
 .DS_Store
